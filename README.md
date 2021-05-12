@@ -3,8 +3,8 @@
 - Here disaster data from [Figure Eight](https://appen.com/) is analyzed to build a model for an API that classifies disaster messages. 
 You can find a data set containing real messages that were sent during disaster events in the data folder. The aim is to create a machine learning pipeline to categorize these events so that the messages are recieved by an appropriate disaster relief agency. The project includes a web app where an emergency worker can input a new message and get classification results in several categories. The web app will also display visualizations of the data. 
 
-![alt text](https://github.com/pxr-merida/Disaster_Response_Pipeline/figs/disaster-response-project1.png?raw=true "Optional Title")
-![alt text](https://github.com/pxr-merida/Disaster_Response_Pipeline/figs/disaster-response-project2.png?raw=true "Optional Title")
+![alt text](figs/disaster-response-project1.png?raw=true)
+![alt text](figs/disaster-response-project2.png?raw=true)
 
 ## Project Components 
 
