@@ -31,8 +31,7 @@ You can find a data set containing real messages that were sent during disaster 
 - Exports the final model as a pickle file
 
 #### Flask Web App
-Flask web app is provided in app folder 
-
+Flask web app is provided in app folder as ```app/run.py``` with templates as ```app/templates/go.html app/templates/master.html```
 
 ## Instructions:
 
