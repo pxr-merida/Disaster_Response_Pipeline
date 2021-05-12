@@ -1,15 +1,29 @@
 import json
 import plotly
 import pandas as pd
-
+import numpy as np
+import pdb
 from nltk.stem import WordNetLemmatizer
 from nltk.tokenize import word_tokenize
-
+import plotly
 from flask import Flask
 from flask import render_template, request, jsonify
 from plotly.graph_objs import Bar
 from sklearn.externals import joblib
 from sqlalchemy import create_engine
+from wordcloud import WordCloud, STOPWORDS
+import random
+from collections import Counter
+
+import re
+import nltk
+from nltk.stem import PorterStemmer, WordNetLemmatizer
+from nltk.corpus import stopwords
+from nltk import word_tokenize
+
+nltk.download('punkt')
+nltk.download('stopwords')
+nltk.download('wordnet')
 
 app = Flask(__name__)
 
@@ -26,12 +40,12 @@ def tokenize(text):
     return clean_tokens
 
 
-# load data
-engine = create_engine('sqlite:///../data/YourDatabaseName.db')
-df = pd.read_sql_table('YourTableName', engine)
 
+# load data
+engine = create_engine('sqlite:///../data/DisasterResponse.db')
+df = pd.read_sql_table('df', engine)
 # load model
-model = joblib.load("../models/your_model_name.pkl")
+model = joblib.load("../models/classifier.pkl")
 
 
 # index webpage displays cool visuals and receives user input text for model
@@ -42,6 +56,12 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+
+    complete_list = ' '.join([i for i in df['message']])
+    counts = Counter(tokenize(complete_list))
+    words = [word for word, word_count in Counter(counts).most_common(30)]
+    colors = [plotly.colors.DEFAULT_PLOTLY_COLORS[random.randrange(1, 10)] for i in range(30)]
+    weights = list(range(30))[::-1]
 
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
@@ -63,7 +83,26 @@ def index():
                     'title': "Genre"
                 }
             }
-        }
+        },
+        {
+            'data': [
+                Scatter(
+                    x=[random.random() for i in range(30)],
+                    y=list(range(30)),
+                    mode='text',
+                    text=words,
+                    marker={'opacity': 0.3},
+                    textfont={'color': colors}
+                )
+            ],
+
+            'layout': {
+                'title': 'WordCloud - Top Words',
+                'xaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False},
+                'yaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False},
+                'hoverinfo': 'none'
+            }
+        }       
     ]
 
     # encode plotly graphs in JSON
