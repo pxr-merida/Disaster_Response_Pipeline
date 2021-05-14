@@ -30,6 +30,9 @@ def load_data(database_filepath):
     df = pd.read_sql_table('df', engine)
     # drop target feature 'child_alone' since it only contains one class
     df = df.drop('child_alone', axis=1)
+    #convert all categories to binary
+    df['related'] = df['related'].astype('str').str.replace('2', '1')
+    df['related'] = df['related'].astype('int')
     # split into targets and feature
     X = df['message']
     Y = df.drop(['message', 'genre', 'id', 'original'], axis=1)
