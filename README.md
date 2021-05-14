@@ -33,6 +33,10 @@ You can find a data set containing real messages that were sent during disaster 
 #### Flask Web App
 Flask web app is provided in app folder as ```app/run.py``` with templates as ```app/templates/go.html app/templates/master.html```
 
+# Installations
+# Acknowledgments
+
+
 ## Instructions:
 
 1. Run the following commands in the project's root directory to set up your database and model.
