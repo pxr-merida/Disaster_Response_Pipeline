@@ -86,23 +86,22 @@ def index():
         },
         {
             'data': [
-                Scatter(
-                    x=[random.random() for i in range(30)],
-                    y=list(range(30)),
-                    mode='text',
-                    text=words,
-                    marker={'opacity': 0.3},
-                    textfont={'color': colors}
+                Bar(
+                    x=label_names,
+                    y=label_sums,
                 )
             ],
 
             'layout': {
-                'title': 'WordCloud - Top Words',
-                'xaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False},
-                'yaxis': {'showgrid': False, 'showticklabels': False, 'zeroline': False},
-                'hoverinfo': 'none'
+                'title': 'Distribution of categories',
+                'yaxis': {
+                    'title': "Count"
+                },
+                'xaxis': {
+
+                },
             }
-        }       
+        }     
     ]
 
     # encode plotly graphs in JSON
