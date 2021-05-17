@@ -47,7 +47,6 @@ def clean_data(df):
     #convert all categories to binary
     # Value 2 also means no to do question and replaced with 0
     categories.related.replace(2, 0, inplace=True)
-    df['related'] = df['related'].astype('int')
     # drop the original categories column from `df`
     df=df.drop(columns=['categories'])
     # concatenate the original dataframe with the new `categories` dataframe
