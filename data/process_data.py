@@ -44,6 +44,8 @@ def clean_data(df):
     #Iterate through the category columns in df to keep only the last character of each string (the 1 or 0).
     #Convert the string to a numeric value.
     categories = categories.applymap(lambda s: int(s[-1])).astype(int)
+    # Value 2 also means no to do question and replaced with 0
+    categories.related.replace(2, 0, inplace=True)
     # drop the original categories column from `df`
     df=df.drop(columns=['categories'])
     # concatenate the original dataframe with the new `categories` dataframe
