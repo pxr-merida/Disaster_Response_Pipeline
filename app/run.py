@@ -56,12 +56,11 @@ def index():
     # TODO: Below is an example - modify to extract data for your own visuals
     genre_counts = df.groupby('genre').count()['message']
     genre_names = list(genre_counts.index)
+    
+    ### data for visualizing category counts.
+    label_sums = df.iloc[:, 4:].sum()
+    label_names = list(label_sums.index)
 
-    complete_list = ' '.join([i for i in df['message']])
-    counts = Counter(tokenize(complete_list))
-    words = [word for word, word_count in Counter(counts).most_common(30)]
-    colors = [plotly.colors.DEFAULT_PLOTLY_COLORS[random.randrange(1, 10)] for i in range(30)]
-    weights = list(range(30))[::-1]
 
     # create visuals
     # TODO: Below is an example - modify to create your own visuals
